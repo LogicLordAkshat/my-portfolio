@@ -164,6 +164,33 @@ const config = {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+        // Orbit animations for tech stack
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "spin-slower": {
+          "0%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+        "spin-slowest": {
+          "0%": { transform: "rotate(180deg)" },
+          "100%": { transform: "rotate(540deg)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { 
+            boxShadow: "0 0 20px rgba(139, 92, 246, 0.3)",
+            transform: "scale(1)"
+          },
+          "50%": { 
+            boxShadow: "0 0 30px rgba(236, 72, 153, 0.6)",
+            transform: "scale(1.05)"
+          },
+        },
       },
       animation: {
   // Accordion animations: Slightly increased duration for a smoother, less abrupt feel
@@ -194,7 +221,13 @@ const config = {
   // Scroll animation (kept as is, as it uses CSS variables)
   scroll:
     "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-},
+        // Orbit animations
+        "spin-slow": "spin-slow 20s linear infinite",
+        "spin-slower": "spin-slower 30s linear infinite",
+        "spin-slowest": "spin-slowest 40s linear infinite",
+        "float": "float 3s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+      },
     },
   },
   plugins: [

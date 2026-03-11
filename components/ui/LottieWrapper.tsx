@@ -1,8 +1,10 @@
-// components/ui/LottieWrapper.tsx
 "use client";
 
-import React from "react";
-import Lottie, { LottieProps } from "lottie-react";
+import Lottie from "lottie-react";
+import { ComponentProps } from "react";
+
+// Correct way to get Lottie props
+type LottieProps = ComponentProps<typeof Lottie>;
 
 const LottieWrapper = (props: LottieProps) => {
   return <Lottie {...props} />;

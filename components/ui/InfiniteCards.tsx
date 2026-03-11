@@ -69,65 +69,57 @@ export const InfiniteMovingCards = ({
   };
 
   return (
-    <div
-      ref={containerRef}
+  <div
+    ref={containerRef}
+    className={cn(
+      "scroller relative z-20 w-full overflow-hidden",
+      "[mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]",
+      className
+    )}
+  >
+    {/* Left & right gradient blur overlays */}
+    <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black to-transparent z-30 pointer-events-none backdrop-blur-sm" />
+    <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black to-transparent z-30 pointer-events-none backdrop-blur-sm" />
+
+    <ul
+      ref={scrollerRef}
       className={cn(
-        "scroller relative z-20 w-screen overflow-hidden",
-        // Reverted mask-image to a simpler fade, as blur will be handled by pseudo-elements
-        "[mask-image:linear-gradient(to_right,transparent_0%,white_10%,white_90%,transparent_100%)]",
-        className
+        "flex min-w-fit shrink-0 gap-10 py-4 px-8 w-max flex-nowrap",
+        start && "animate-scroll",
+        pauseOnHover && "hover:[animation-play-state:paused]"
       )}
     >
-      {/* Pseudo-elements for blur effect */}
-      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black to-transparent z-30 pointer-events-none backdrop-blur-sm" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black to-transparent z-30 pointer-events-none backdrop-blur-sm" />
-
-      <ul
-        ref={scrollerRef}
-        className={cn(
-          "flex min-w-full shrink-0 gap-16 py-4 w-max flex-nowrap",
-          start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]"
-        )}
-      >
-        {items.map((item, idx) => (
-          <li
-            className={cn(
-              "w-[90vw] max-w-full relative rounded-2xl border flex-shrink-0 p-5 md:p-16 md:w-[60vw]",
-              "border-purple-500/[0.9]",
-              "hover:border-purple-400/[1] transition-all duration-300",
-              itemClass
-            )}
-            style={{
-              backgroundColor: "#000000",
-            }}
-            key={idx}
-          >
-            <blockquote>
-              <div
-                aria-hidden="true"
-                className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
-              ></div>
-              <span className="relative z-20 text-sm md:text-lg leading-[1.6] text-purple-100 font-normal">
-                {item.quote}
-              </span>
-              <div className="relative z-20 mt-6 flex flex-row items-center">
-                <div className="me-3">
-                  <img src="/profile.svg" alt="profile" className="filter brightness-0 invert-[0.7]" />
-                </div>
-                <span className="flex flex-col gap-1">
-                  <span className="text-xl font-bold leading-[1.6] text-purple-50">
-                    {item.name}
-                  </span>
-                  <span className="text-sm leading-[1.6] text-purple-200 font-normal">
-                    {item.title}
-                  </span>
-                </span>
+      {items.map((item, idx) => (
+        <li
+          key={idx}
+          className={cn(
+            "relative rounded-2xl border flex-shrink-0 p-5 md:p-10 w-[90vw] md:w-[60vw]",
+            "border-purple-500/[0.9] hover:border-purple-400 transition-all duration-300",
+            itemClass
+          )}
+          style={{ backgroundColor: "#000000" }}
+        >
+          <blockquote>
+            <span className="relative z-20 text-sm md:text-lg leading-[1.6] text-purple-100 font-normal">
+              {item.quote}
+            </span>
+            <div className="relative z-20 mt-6 flex items-center">
+              <div className="me-3">
+                <img
+                  src="/profile.svg"
+                  alt="profile"
+                  className="w-10 h-10 rounded-full filter brightness-0 invert-[0.7]"
+                />
               </div>
-            </blockquote>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+              <span className="flex flex-col gap-1">
+                <span className="text-xl font-bold text-purple-50">{item.name}</span>
+                <span className="text-sm text-purple-200">{item.title}</span>
+              </span>
+            </div>
+          </blockquote>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+}

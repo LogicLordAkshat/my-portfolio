@@ -2,13 +2,15 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": null
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": null
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.emmetCompletions": true
 }
